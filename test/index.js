@@ -9,6 +9,10 @@ var fixture = fs.readFileSync(
 
 var chrome = require('../')
 
+var ext = {
+  name: 'markdown-viewer',
+  id: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk',
+}
 
 describe('index', () => {
   var server
@@ -16,7 +20,13 @@ describe('index', () => {
   before((done) => {
     server = http.createServer()
     server.on('request', (req, res) => {
-      res.end(fixture)
+      if (req.url === `/webstore/details/${ext.id}`) {
+        res.writeHead(301, {location: `/webstore/details/${ext.name}/${ext.id}`})
+        res.end()
+      }
+      else if (req.url === `/webstore/details/${ext.name}/${ext.id}`) {
+        res.end(fixture)
+      }
     })
     server.listen(5000, done)
   })
@@ -24,8 +34,8 @@ describe('index', () => {
   it('extension', async () => {
     t.deepEqual(
       await chrome.extension({
-        id: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk',
-        origin: 'http://localhost:5000'
+        id: ext.id,
+        url: `http://localhost:5000/webstore/details/${ext.id}`
       }),
       {
         "id": "ckkdlimhmcjmikdlpkmbgfkaikojcbjk",

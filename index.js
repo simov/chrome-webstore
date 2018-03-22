@@ -7,9 +7,9 @@ var format = require('./lib/format')
 
 module.exports = {
 
-  extension: ({id, origin}) =>
+  extension: ({url, id}) =>
     request({
-      url: `${origin || 'https://chrome.google.com'}/webstore/detail/${id}`
+      url: url || `https://chrome.google.com/webstore/detail/${id}`
     })
     .then(({body}) => format(extract(id, body)))
 

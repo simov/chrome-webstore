@@ -8,6 +8,10 @@ var chrome = require('chrome-webstore')
 
 ;(async () => {
   var meta = await chrome.extension({id: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'})
+  // or
+  var meta = await chrome.extension({
+    url: 'https://chrome.google.com/webstore/detail/markdown-viewer/ckkdlimhmcjmikdlpkmbgfkaikojcbjk'
+  })
   console.log(meta)
 })()
 ```
