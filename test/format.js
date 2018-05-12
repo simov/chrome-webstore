@@ -13,8 +13,8 @@ describe('format', () => {
 
   it('values', () => {
     var meta = format(extract('ckkdlimhmcjmikdlpkmbgfkaikojcbjk', fixture))
-    t.equal(meta.interactionCount, '35,055')
-    t.equal(meta.ratingValue, '4.44')
+    t.equal(meta.interactionCount, '41,639')
+    t.equal(meta.ratingValue, '4.38')
     t.ok(meta.description.indexOf('&#39;') === -1)
   })
 

@@ -17,13 +17,13 @@ describe('extract', () => {
         name: 'Markdown Viewer',
         url: 'https://chrome.google.com/webstore/detail/markdown-viewer/ckkdlimhmcjmikdlpkmbgfkaikojcbjk',
         image: 'https://lh3.googleusercontent.com/78nux4sjd5uRGIB1oaSFT_zkiktsy-GX_HAGTrKlxnOiw1Jc7Fwhx8IijRpoqYgeiuuPxzQa=w128-h128-e365',
-        version: '3.4',
+        version: '3.5',
         price: '0',
         priceCurrency: 'USD',
-        interactionCount: 'UserDownloads:35,055',
+        interactionCount: 'UserDownloads:41,639',
         operatingSystem: 'Chrome',
-        ratingValue: '4.4363636363636365',
-        ratingCount: '110'
+        ratingValue: '4.383333333333334',
+        ratingCount: '120'
       },
       'should extract all meta tag values'
     )
@@ -33,8 +33,8 @@ describe('extract', () => {
     t.deepEqual(
       extract.details(fixture),
       {
-        updated: 'January 13, 2018',
-        size: '230KiB',
+        updated: 'April 16, 2018',
+        size: '219KiB',
         // language: 'English'
       },
       'should extract details'
@@ -71,6 +71,7 @@ describe('extract', () => {
 ✔ Raw and rendered markdown views
 ✔ Detects markdown by header and path
 ✔ Toggle Content Security Policy
+✔ Override page encoding
 ✔ Free and Open Source
 
 ✚ Local Files
@@ -110,18 +111,18 @@ describe('extract', () => {
         name: 'Markdown Viewer',
         url: 'https://chrome.google.com/webstore/detail/markdown-viewer/ckkdlimhmcjmikdlpkmbgfkaikojcbjk',
         image: 'https://lh3.googleusercontent.com/78nux4sjd5uRGIB1oaSFT_zkiktsy-GX_HAGTrKlxnOiw1Jc7Fwhx8IijRpoqYgeiuuPxzQa=w128-h128-e365',
-        version: '3.4',
+        version: '3.5',
         price: '0',
         priceCurrency: 'USD',
-        interactionCount: 'UserDownloads:35,055',
+        interactionCount: 'UserDownloads:41,639',
         operatingSystem: 'Chrome',
-        ratingValue: '4.4363636363636365',
-        ratingCount: '110',
-        updated: 'January 13, 2018',
-        size: '230KiB',
+        ratingValue: '4.383333333333334',
+        ratingCount: '120',
+        updated: 'April 16, 2018',
+        size: '219KiB',
         // language: 'English',
         website: 'https://github.com/simov/markdown-viewer',
-        description: '✔ No special permissions required for file URLs\n✔ Full control over the allowed origins\n✔ Supports multiple markdown parsers\n✔ Full control over the compiler options\n✔ Themes support (including GitHub theme)\n✔ Supports GitHub Flavored Markdown\n✔ Syntax highlighted code blocks\n✔ Generates Table of Contents (TOC)\n✔ Remembers scroll position\n✔ Emoji support\n✔ MathJax support\n✔ Settings synchronization\n✔ Raw and rendered markdown views\n✔ Detects markdown by header and path\n✔ Toggle Content Security Policy\n✔ Free and Open Source\n\n✚ Local Files\n\n1. Navigate to chrome://extensions\n2. Make sure that the &#39;Allow access to file URLs&#39; checkbox is checked for the Markdown Viewer extension\n\n✚ Remote Files\n\n1. Click on the Markdown Viewer icon and select &#39;Advanced Options&#39;\n2. Add the origin that you want enabled for the Markdown Viewer extension\n\n✚ Compiler Options\n\n✔ Compilers: Marked, Remark\n✔ Documentation: https://github.com/simov/markdown-viewer#compiler-options\n\n✚ Content Options\n\n✔ Features: TOC, Scroll, Emoji, Mathjax\n✔ Documentation: https://github.com/simov/markdown-viewer#content-options\n\n✚ Full Documentation\n\n✔ https://github.com/simov/markdown-viewer'
+        description: '✔ No special permissions required for file URLs\n✔ Full control over the allowed origins\n✔ Supports multiple markdown parsers\n✔ Full control over the compiler options\n✔ Themes support (including GitHub theme)\n✔ Supports GitHub Flavored Markdown\n✔ Syntax highlighted code blocks\n✔ Generates Table of Contents (TOC)\n✔ Remembers scroll position\n✔ Emoji support\n✔ MathJax support\n✔ Settings synchronization\n✔ Raw and rendered markdown views\n✔ Detects markdown by header and path\n✔ Toggle Content Security Policy\n✔ Override page encoding\n✔ Free and Open Source\n\n✚ Local Files\n\n1. Navigate to chrome://extensions\n2. Make sure that the &#39;Allow access to file URLs&#39; checkbox is checked for the Markdown Viewer extension\n\n✚ Remote Files\n\n1. Click on the Markdown Viewer icon and select &#39;Advanced Options&#39;\n2. Add the origin that you want enabled for the Markdown Viewer extension\n\n✚ Compiler Options\n\n✔ Compilers: Marked, Remark\n✔ Documentation: https://github.com/simov/markdown-viewer#compiler-options\n\n✚ Content Options\n\n✔ Features: TOC, Scroll, Emoji, Mathjax\n✔ Documentation: https://github.com/simov/markdown-viewer#content-options\n\n✚ Full Documentation\n\n✔ https://github.com/simov/markdown-viewer'
       },
       'should return single object'
     )
