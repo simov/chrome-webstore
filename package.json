@@ -1,7 +1,7 @@
 {
   "name": "chrome-webstore",
   "version": "0.0.4",
-  "description": "Chrome WebStore Tools",
+  "description": "Google Chrome Web Store HTTP Client",
   "keywords": [
     "chrome",
     "webstore",
@@ -15,18 +15,18 @@
     "url": "https://github.com/simov/chrome-webstore.git"
   },
   "dependencies": {
-    "html-entities": "^1.2.1",
-    "request-compose": "0.0.18"
+    "request-compose": "0.0.19"
   },
   "devDependencies": {
-    "coveralls": "^3.0.1",
+    "coveralls": "^3.0.2",
     "istanbul": "^1.1.0-alpha.1",
-    "mocha": "^5.1.1",
+    "mocha": "^5.2.0",
     "request-logs": "0.0.5"
   },
   "bin": {},
   "main": "./index.js",
   "files": [
+    "config/",
     "lib/",
     "index.js",
     "LICENSE",
