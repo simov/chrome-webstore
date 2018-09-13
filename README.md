@@ -17,12 +17,12 @@
 
 Method     | Arguments | Returns    | Description
 ---        | ---       | ---        | ---
-**detail** | `{id, related, more}`  | `{Object}` | Get full details about a Web Store item
-**items**  | `{search, category, rating, features, count, offset}` | `[Array]` | Get list of Web Store items
+**detail** | `{id, related, more}`  | `{Object}` | Full details about a Web Store item
+**items**  | `{search, category, rating, features, count, offset}` | `[Array]` | List Web Store items
 
 ## detail
 
-Get details for a Web Store item:
+Get full detail data about a Web Store item:
 
 ```js
 var webstore = require('chrome-webstore')
@@ -33,7 +33,8 @@ var webstore = require('chrome-webstore')
 })()
 ```
 
-Returns all available data for an item:
+<details>
+<summary>click to expand</summary>
 
 ```js
 {
@@ -69,6 +70,8 @@ Returns all available data for an item:
 }
 ```
 
+</details>
+
 Additionally a list of `related` extensions and `more` from the same developer can be included in the result set:
 
 ```js
@@ -83,7 +86,7 @@ var webstore = require('chrome-webstore')
 
 ## items
 
-Get a list of items from Chrome Web Store:
+Get a list of items from Chrome Web Store (only a subset of the detail data):
 
 ```js
 var webstore = require('chrome-webstore')
@@ -94,7 +97,8 @@ var webstore = require('chrome-webstore')
 })()
 ```
 
-Returns a list of items (only a subset of the detail data):
+<details>
+<summary>click to expand</summary>
 
 ```js
 [
@@ -137,6 +141,8 @@ Returns a list of items (only a subset of the detail data):
 ]
 ```
 
+</details>
+
 # Items Filter Parameters
 
 The `items` method supports the following parameters:
@@ -167,6 +173,16 @@ var webstore = require('chrome-webstore')
 
 Filter by category name:
 
+Category            | Description
+---                 | ---
+`extensions`        | All extensions
+`ext/[NAME]`        | Extensions category
+`themes`            | All themes
+`theme/[NAME]`      | Themes category
+`apps`              | All apps
+`app/[NAME]`        | Apps category
+`collection/[NAME]` | Collection
+
 ```js
 var webstore = require('chrome-webstore')
 
@@ -176,35 +192,7 @@ var webstore = require('chrome-webstore')
 })()
 ```
 
-The following category names are available:
-
-Category            | Description
----                 | ---
-`extensions`        | All extensions
-`ext/[NAME]`        | Specific extension's category
-`themes`            | All themes
-`theme/[NAME]`      | Specific theme's category
-`collection/[NAME]` | Specific collection
-
-### Extension Categories `ext/[NAME]`
-
-`22-accessibility` | `10-blogging` | `15-by-google` | `11-web-development` | `14-fun` | `6-news` | `28-photos` | `7-productivity` | `38-search-tools` | `12-shopping` | `1-communication` | `13-sports`
-
-### Extension Collections `collection/[NAME]`
-
-`new_noteworthy_extensions` | `editors_picks_extensions` | `chrome_toolkit` | `screen_capture` | `social` | `personalize_chrome` | `tabs_control` | `artistic_extension` | `calendars_planners` | `chat_with_chrome` | `games_extension` | `everyday_extensions` | `3p_accessibility_extensions` | `customize_your_new_tab_page` | `get_started` | `change_the_way_you_work` | `news_weather` | `pdf_extensions` | `lifehacker` | `blogger_extensions` | `online_tools` | `cyber_monday` | `annotate_the_web` | `music_extensions` | `writing_essentials` | `get_organized` | `pomodoro_extensions` | `save_it_for_later` | `ph` | `job_hunting` | `online_productivity` | `quotes_extensions` | `weather_extensions` | `procrastination_station` | `bad_day` | `relax_extensions`
-
-### Extension Top Picks Collections `collection/[NAME]`
-
-`3p_accessibility_extensions` | `top_picks_blogging` | `top_picks_web-development` | `top_picks_fun` | `top_picks_news` | `top_picks_photos` | `top_picks_productivity` | `top_picks_search-tools` | `top_picks_shopping` | `top_picks_communication` | `top_picks_sports`
-
-### Theme Categories `theme/[NAME]`
-
-`48-by-artists` | `15-by-google`
-
-### Theme Collections `collection/[NAME]`
-
-`editors_picks_themes` | `dark_themes` | `space_exploration` | `minimalist_themes` | `enchanting_places` | `heroes_themes` | `pretty_patterns` | `colorful_themes` | `car_themes` | `sunny_themes` | `blue_themes` | `flower_themes`
+> Check out [examples/category.json][example-category] for a list of available category names.
 
 ## rating
 
@@ -223,6 +211,14 @@ var webstore = require('chrome-webstore')
 
 Filter by set of features:
 
+Value       | Description
+---         | ---
+`'offline'` | Runs Offline
+`'google'`  | By Google
+`'free'`    | Free
+`'android'` | Available for Android
+`'gdrive'`  | Works with Google Drive
+
 ```js
 var webstore = require('chrome-webstore')
 
@@ -231,16 +227,6 @@ var webstore = require('chrome-webstore')
   console.log(meta)
 })()
 ```
-
-Pick any number of the following:
-
-Value       | Description
----         | ---
-`'offline'` | Runs Offline
-`'google'`  | By Google
-`'free'`    | Free
-`'android'` | Available for Android
-`'gdrive'`  | Works with Google Drive
 
 ## count
 
@@ -274,8 +260,8 @@ var webstore = require('chrome-webstore')
 
 ## Examples
 
-- [detail](https://github.com/simov/chrome-webstore/blob/master/examples/detail.js)
-- [items](https://github.com/simov/chrome-webstore/blob/master/examples/items.js)
+- [detail][example-detail]
+- [items][example-items]
 
 ```bash
 node examples/detail.js [example index]
@@ -292,3 +278,7 @@ node examples/items.js [example index]
   [travis]: https://travis-ci.org/simov/chrome-webstore
   [coveralls]: https://coveralls.io/github/simov/chrome-webstore
   [codecov]: https://codecov.io/github/simov/chrome-webstore?branch=master
+
+  [example-detail]: https://github.com/simov/chrome-webstore/blob/master/examples/detail.js
+  [example-items]: https://github.com/simov/chrome-webstore/blob/master/examples/items.js
+  [example-category]: https://github.com/simov/chrome-webstore/blob/master/examples/category.json
