@@ -1,9 +1,7 @@
-if (!process.argv[2]) {console.log('Specify example to run'); process.exit()}
 
 var webstore = require('../')
 
-
-var examples = {
+;((key) => ({
 
   // search for markdown extensions
   0: async () => {
@@ -94,6 +92,4 @@ var examples = {
     console.log(items)
   },
 
-}
-
-examples[process.argv[2]]()
+}[key]()))(process.argv[2])
