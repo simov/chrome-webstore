@@ -1,0 +1,47 @@
+
+module.exports = (detail) => ({
+  id: detail[0][0],
+  name: detail[0][1],
+  title: detail[0][6],
+  slug: detail[0][61],
+  url: detail[0][37],
+  author: {
+    name: detail[0][2],
+    domain: detail[0][35],
+    url: detail[0][81],
+  },
+  description: detail[1],
+  website: detail[3],
+  support: detail[5],
+  version: detail[6],
+  size: detail[25],
+  published: detail[7],
+  users: detail[0][23],
+  rating: {
+    average: detail[0][12],
+    count: detail[0][22],
+  },
+  price: detail[0][30],
+  purchases: detail[36],
+  category: {
+    name: detail[0][10],
+    slug: detail[0][9],
+  },
+  images: {
+    '26x26': detail[0][3],
+    '128x128': detail[0][25],
+    '141x90': detail[0][65],
+    '220x140': detail[0][4],
+    '440x280': detail[0][76],
+    '460x340': detail[0][5],
+  },
+  languages: detail[8],
+  developer: {
+    email: detail[35][0] || null,
+    address: detail[35][1] || null,
+    policy: detail[35][2] || null,
+  },
+  type: detail[10],
+  status: detail[0][84],
+  manifest: detail[9][0],
+})

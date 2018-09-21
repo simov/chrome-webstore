@@ -3,7 +3,7 @@ var webstore = require('../')
 
 ;((key) => ({
 
-  // search for markdown extensions
+  // search by markdown string
   0: async () => {
     var meta = await webstore.items({search: 'markdown'})
     console.log(meta)
@@ -39,19 +39,19 @@ var webstore = require('../')
     console.log(meta)
   },
 
-  // filter by extension collection
+  // filter by collection name
   5: async () => {
     var meta = await webstore.items({category: 'collection/new_noteworthy_extensions'})
     console.log(meta)
   },
 
-  // filter by extension rating
+  // filter by item rating
   6: async () => {
     var meta = await webstore.items({search: 'markdown', rating: 4})
     console.log(meta)
   },
 
-  // filter by extension rating and features
+  // filter by item rating and features
   7: async () => {
     var meta = await webstore.items({
       search: 'markdown', rating: 4, features: ['offline', 'gdrive']

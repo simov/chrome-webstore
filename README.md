@@ -8,33 +8,32 @@
 ## Table of Contents
 
 - **[API](#api)**
-  - [detail](#detail) / [items](#items)
-- **[Items Filter Parameters](#items-filter-parameters)**
-  - [search](#search) / [category](#category) / [rating](#rating) / [features](#features)  / [count](#count) / [offset](#offset)
+- **[Arguments](#arguments)**
+  - [detail](#detail) / [items](#items) / [reviews](#reviews) / [issues](#issues)
 - **[Examples](#examples)**
 
 # API
 
-Method     | Arguments | Returns    | Description
----        | ---       | ---        | ---
-**detail** | `{id, related, more}`  | `{Object}` | Full details about a Web Store item
-**items**  | `{search, category, rating, features, count, offset}` | `[Array]` | List Web Store items
-
-## detail
-
-Get full detail data about a Web Store item:
+Method      | Arguments | Returns    | Description
+---         | ---       | ---        | ---
+**detail**  | `{id, related, more}`  | `{Object}` | Full details about a Web Store item
+**items**   | `{search, category, rating, features, count, offset}` | `[Array]` | List Web Store items (subset of the detail data)
+**reviews** | `{id, count, offset, locale, sort}` | `[Array]` | List reviews for an item
+**issues**  | `{id, type, count, page}` | `[Array]` | List issues for an item
 
 ```js
 var webstore = require('chrome-webstore')
 
 ;(async () => {
-  var meta = await webstore.detail({id: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'})
-  console.log(meta)
+  var items = await webstore.items({search: 'markdown', category: 'extensions'})
+  var details = await webstore.detail({id: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'})
+  var reviews = await webstore.reviews({id: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'})
+  var issues = await webstore.issues({id: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'})
 })()
 ```
 
 <details>
-<summary>click to expand</summary>
+<summary><strong>detail</strong></summary>
 
 ```js
 {
@@ -50,8 +49,8 @@ var webstore = require('chrome-webstore')
   version: '3.6',
   size: '223KiB',
   published: 'July 7, 2018',
-  users: '46,860',
-  rating: { average: 4.328467153284672, count: 137 },
+  users: '51,850',
+  rating: { average: 4.355704697986577, count: 149 },
   price: 'Free',
   purchases: null,
   category: { name: 'Productivity', slug: 'ext/7-productivity' },
@@ -72,33 +71,8 @@ var webstore = require('chrome-webstore')
 
 </details>
 
-Additionally a list of `related` extensions and `more` from the same developer can be included in the result set:
-
-```js
-var webstore = require('chrome-webstore')
-
-;(async () => {
-  var meta = await webstore.detail({id: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk', related: true, more: true})
-  console.log(meta)
-})()
-```
-
-
-## items
-
-Get a list of items from Chrome Web Store (only a subset of the detail data):
-
-```js
-var webstore = require('chrome-webstore')
-
-;(async () => {
-  var meta = await webstore.items({search: 'markdown', category: 'extensions', count: 2})
-  console.log(meta)
-})()
-```
-
 <details>
-<summary>click to expand</summary>
+<summary><strong>items</strong></summary>
 
 ```js
 [
@@ -108,8 +82,8 @@ var webstore = require('chrome-webstore')
     slug: 'markdown-here',
     url: 'https://chrome.google.com/webstore/detail/markdown-here/elifhakcjgalahccnjkneoccemfahfoa',
     author: { name: 'Adam Pritchard', domain: null, url: null },
-    users: '80,395',
-    rating: { average: 4.530864197530864, count: 324 },
+    users: '84,640',
+    rating: { average: 4.533132530120482, count: 332 },
     price: 'Free',
     category: { name: 'Productivity', slug: 'ext/7-productivity' },
     images:
@@ -126,8 +100,8 @@ var webstore = require('chrome-webstore')
     slug: 'markdown-viewer',
     url: 'https://chrome.google.com/webstore/detail/markdown-viewer/ckkdlimhmcjmikdlpkmbgfkaikojcbjk',
     author: { name: 'simov.github.io', domain: null, url: null },
-    users: '46,860',
-    rating: { average: 4.328467153284672, count: 137 },
+    users: '51,850',
+    rating: { average: 4.355704697986577, count: 149 },
     price: 'Free',
     category: { name: 'Productivity', slug: 'ext/7-productivity' },
     images:
@@ -143,35 +117,85 @@ var webstore = require('chrome-webstore')
 
 </details>
 
-# Items Filter Parameters
+<details>
+<summary><strong>reviews</strong></summary>
 
-The `items` method supports the following parameters:
+```js
+[
+  { rating: 5,
+    message: 'Awesome extension. \n\nThank you very much :)',
+    created: 1533732378563,
+    updated: 1533732655781,
+    author:
+     { id: '0000009cb63b6d30',
+       name: 'Quan Lao',
+       avatar: null,
+       url: 'https://plus.google.com/112697168067713123105' } },
+  { rating: 3,
+    message: 'Useful and effective.\nGood to have a provision to easily include additional codeblock languages as an extension function.',
+    created: 1531466745894,
+    updated: 1531466864058,
+    author:
+     { id: '000000ed243a38c0',
+       name: 'Girisan Ramankutty',
+       avatar: 'https://lh3.googleusercontent.com/-yXupPr2Oyig/AAAAAAAAAAI/AAAAAAAAAFg/_9tTLqzivCA/s40-c-k/photo.jpg',
+       url: 'https://plus.google.com/113509128358323131688' } }
+]
+```
+
+</details>
+
+<details>
+<summary><strong>issues</strong></summary>
+
+```js
+[
+  { type: 'suggestion',
+    status: 'open',
+    title: 'Is it possible to support previewing sequence diagrams?',
+    description: 'Is it possible to support previewing sequence diagrams? Such as\n\n````sequence\nAlice->Bob: Hello Bob, how are you?\nNote right of Bob: Bob thinks\nBob-->Alice: I am good thanks!\n````\n',
+    browser: '5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+    version: '3.6',
+    date: 1536911367008 },
+  { type: 'problem',
+    status: 'open',
+    title: 'Unicode characters not displaying correctly',
+    description: 'works perfect is the  best of i find, butt... \nUnicode characters not displaying correctly',
+    browser: '5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36',
+    version: '3.6',
+    date: 1536360343936 }
+]
+```
+
+</details>
+
+
+# Arguments
+
+## detail
 
 Parameter    | Example        | Description
 ---          | :---:          | ---
-**search**   | `'markdown'`   | Search term to filter by
-**category** | `'extensions'` | Category name to filter by
-**rating**   | `4`            | Filter items by number of stars
+**id**   | `'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'`   | Item ID
+**related**   | `true`   | Additionally return a list of related extensions
+**more**   | `true`   | Additionally return more items from the same developer
+
+---
+
+## items
+
+Parameter    | Example        | Description
+---          | :---:          | ---
+**search**   | `'markdown'`   | Filter items by search term
+**category** | `'extensions'` | Filter items by category name
+**rating**   | `5` / `4` / `3` / `2` | Filter items by number of stars
 **features** | `['free', 'gdrive']` | Filter items by feature set
-**count**    | `15`           | Number of results to return
-**offset**   | `15`           | Return up to results `count` starting from `offset`
+**count**    | `15`           | Number of items to return (defaults to 5)
+**offset**   | `15`           | Start returning items from `offset` (**requires** `category`)
 
-## search
+### category
 
-Search the store by string:
-
-```js
-var webstore = require('chrome-webstore')
-
-;(async () => {
-  var meta = await webstore.items({search: 'markdown', category: 'extensions'})
-  console.log(meta)
-})()
-```
-
-## category
-
-Filter by category name:
+> Check out [examples/category.json][example-category] for a full list of available category names.
 
 Category            | Description
 ---                 | ---
@@ -183,33 +207,7 @@ Category            | Description
 `app/[NAME]`        | Apps category
 `collection/[NAME]` | Collection
 
-```js
-var webstore = require('chrome-webstore')
-
-;(async () => {
-  var meta = await webstore.items({category: 'collection/new_noteworthy_extensions'})
-  console.log(meta)
-})()
-```
-
-> Check out [examples/category.json][example-category] for a list of available category names.
-
-## rating
-
-Filter by number of stars, one of: `5`, `4`, `3` or `2` stars:
-
-```js
-var webstore = require('chrome-webstore')
-
-;(async () => {
-  var meta = await webstore.items({category: 'extensions', rating: 4})
-  console.log(meta)
-})()
-```
-
-## features
-
-Filter by set of features:
+### features
 
 Value       | Description
 ---         | ---
@@ -219,53 +217,38 @@ Value       | Description
 `'android'` | Available for Android
 `'gdrive'`  | Works with Google Drive
 
-```js
-var webstore = require('chrome-webstore')
+---
 
-;(async () => {
-  var meta = await webstore.items({category: 'extensions', features: ['offline', 'gdrive']})
-  console.log(meta)
-})()
-```
+## reviews
 
-## count
+Parameter    | Example        | Description
+---          | :---:          | ---
+**id**   | `'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'`   | Item ID
+**count**   | `10`   | Number of reviews to return (defaults to 5)
+**offset**   | `10`   | Start returning items from offset
+**locale**   | `'en'`   | Return reviews only in locale (defaults to all locales)
+**sort**   | `'helpful'` / `'recent'`   | Sort order (defaults to helpful)
 
-Request specific number of records (defaults to 5):
+---
 
-```js
-var webstore = require('chrome-webstore')
+## issues
 
-;(async () => {
-  var meta = await webstore.items({search: 'markdown', category: 'extensions', count: 15})
-  console.log(meta)
-})()
-```
+Parameter    | Example        | Description
+---          | :---:          | ---
+**id**   | `'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'`   | Item ID
+**type**   | `'problem'` / `'question'` / `'suggestion'`   | Filter by issue type (defaults to all)
+**count**   | `10`   | Number of issues to return (defaults to 5)
+**page**   | `2`   | Start returning issues from page (page * count)
 
-## offset
+# Examples
 
-Return up to results `count` starting from `offset` (useful for pagination):
-
-```js
-var webstore = require('chrome-webstore')
-
-;(async () => {
-  var meta = await webstore.items({
-    search: 'markdown', category: 'extensions', count: 10, offset: 10
-  })
-  console.log(meta)
-})()
-```
-
-> **Requires the `category` parameter!**
-
-## Examples
-
-- [detail][example-detail]
-- [items][example-items]
+> [detail][example-detail] / [items][example-items] / [reviews][example-reviews] / [issues][example-issues]
 
 ```bash
 node examples/detail.js [example index]
 node examples/items.js [example index]
+node examples/reviews.js [example index]
+node examples/issues.js [example index]
 ```
 
 
@@ -279,6 +262,8 @@ node examples/items.js [example index]
   [coveralls]: https://coveralls.io/github/simov/chrome-webstore
   [codecov]: https://codecov.io/github/simov/chrome-webstore?branch=master
 
+  [example-category]: https://github.com/simov/chrome-webstore/blob/master/examples/category.json
   [example-detail]: https://github.com/simov/chrome-webstore/blob/master/examples/detail.js
   [example-items]: https://github.com/simov/chrome-webstore/blob/master/examples/items.js
-  [example-category]: https://github.com/simov/chrome-webstore/blob/master/examples/category.json
+  [example-reviews]: https://github.com/simov/chrome-webstore/blob/master/examples/reviews.js
+  [example-issues]: https://github.com/simov/chrome-webstore/blob/master/examples/issues.js

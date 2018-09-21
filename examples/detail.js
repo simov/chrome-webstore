@@ -33,8 +33,14 @@ var webstore = require('../')
     console.log(meta)
   },
 
-  // include related extensions and more from the same developer
+  // app - stackedit
   5: async () => {
+    var meta = await webstore.detail({id: 'iiooodelglhkcpgbajoejffhijaclcdg'})
+    console.log(meta)
+  },
+
+  // include related extensions and more from the same developer
+  6: async () => {
     var meta = await webstore.detail({
       id: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk', related: true, more: true
     })
