@@ -3,7 +3,7 @@
 
 [![npm-version]][npm]
 
-> Google Chrome Web Store HTTP Client
+> _Google Chrome Web Store HTTP Client_
 
 ## Table of Contents
 
@@ -14,12 +14,12 @@
 
 # API
 
-Method      | Arguments | Returns    | Description
----         | ---       | ---        | ---
-**detail**  | `{id, related, more}`  | `{Object}` | Full details about a Web Store item
-**items**   | `{search, category, rating, features, count, offset}` | `[Array]` | List Web Store items (subset of the detail data)
-**reviews** | `{id, count, offset, locale, sort}` | `[Array]` | List reviews for an item
-**issues**  | `{id, type, count, page}` | `[Array]` | List issues for an item
+Name    | Arguments | Returns    | Description
+---     | ---       | ---        | ---
+detail  | `{id, related, more, ...options}`  | `{Object}` | Full details about a Web Store item
+items   | `{search, category, rating, features, count, offset, ...options}` | `[Array]` | List Web Store items (subset of the detail data)
+reviews | `{id, count, offset, locale, sort, ...options}` | `[Array]` | List reviews for an item
+issues  | `{id, type, count, page, ...options}` | `[Array]` | List issues for an item
 
 ```js
 var webstore = require('chrome-webstore')
@@ -174,24 +174,26 @@ var webstore = require('chrome-webstore')
 
 ## detail
 
-Parameter    | Example        | Description
----          | :---:          | ---
-**id**   | `'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'`   | Item ID
-**related**   | `true`   | Additionally return a list of related extensions
-**more**   | `true`   | Additionally return more items from the same developer
+Parameter  | Example   | Description
+---        | :---:     | ---
+id         | `'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'` | Item ID
+related    | `true`    | Additionally return a list of related extensions
+more       | `true`    | Additionally return more items from the same developer
+...options | `agent, timeout` | any [request-compose][compose-client-options] option
 
 ---
 
 ## items
 
-Parameter    | Example        | Description
----          | :---:          | ---
-**search**   | `'markdown'`   | Filter items by search term
-**category** | `'extensions'` | Filter items by category name
-**rating**   | `5` / `4` / `3` / `2` | Filter items by number of stars
-**features** | `['free', 'gdrive']` | Filter items by feature set
-**count**    | `15`           | Number of items to return (defaults to 5)
-**offset**   | `15`           | Start returning items from `offset` (**requires** `category`)
+Parameter  | Example          | Description
+---        | :---:            | ---
+search     | `'markdown'`     | Filter items by search term
+category   | `'extensions'`   | Filter items by category name
+rating     | `5` / `4` / `3` / `2` | Filter items by number of stars
+features   | `['free', 'gdrive']` | Filter items by feature set
+count      | `15`             | Number of items to return (defaults to 5)
+offset     | `15`             | Start returning items from `offset` (**requires** `category`)
+...options | `agent, timeout` | any [request-compose][compose-client-options] option
 
 ### category
 
@@ -221,24 +223,26 @@ Value       | Description
 
 ## reviews
 
-Parameter    | Example        | Description
----          | :---:          | ---
-**id**   | `'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'`   | Item ID
-**count**   | `10`   | Number of reviews to return (defaults to 5)
-**offset**   | `10`   | Start returning items from offset
-**locale**   | `'en'`   | Return reviews only in locale (defaults to all locales)
-**sort**   | `'helpful'` / `'recent'`   | Sort order (defaults to helpful)
+Parameter  | Example  | Description
+---        | :---:    | ---
+id         | `'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'` | Item ID
+count      | `10`     | Number of reviews to return (defaults to 5)
+offset     | `10`     | Start returning items from offset
+locale     | `'en'`   | Return reviews only in locale (defaults to all locales)
+sort       | `'helpful'` / `'recent'` | Sort order (defaults to helpful)
+...options | `agent, timeout` | any [request-compose][compose-client-options] option
 
 ---
 
 ## issues
 
-Parameter    | Example        | Description
----          | :---:          | ---
-**id**   | `'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'`   | Item ID
-**type**   | `'problem'` / `'question'` / `'suggestion'`   | Filter by issue type (defaults to all)
-**count**   | `10`   | Number of issues to return (defaults to 5)
-**page**   | `2`   | Start returning issues from page (page * count)
+Parameter  | Example | Description
+---        | :---:   | ---
+id         | `'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'` | Item ID
+type       | `'problem'` / `'question'` / `'suggestion'` | Filter by issue type (defaults to all)
+count      | `10`    | Number of issues to return (defaults to 5)
+page       | `2`     | Start returning issues from page (page * count)
+...options | `agent, timeout` | any [request-compose][compose-client-options] option
 
 # Examples
 
@@ -261,6 +265,8 @@ node examples/issues.js [example index]
   [travis]: https://travis-ci.org/simov/chrome-webstore
   [coveralls]: https://coveralls.io/github/simov/chrome-webstore
   [codecov]: https://codecov.io/github/simov/chrome-webstore?branch=master
+
+  [compose-client-options]: https://github.com/simov/request-compose#options
 
   [example-category]: https://github.com/simov/chrome-webstore/blob/master/examples/category.json
   [example-detail]: https://github.com/simov/chrome-webstore/blob/master/examples/detail.js
