@@ -13,8 +13,8 @@ var VERSION = '20180301'
 
 module.exports = {
 
-  items: ({search, category, rating, features, count, offset, version}) => compose(
-    _ => compose.client({
+  items: ({search, category, rating, features, count, offset, version, ...options}) => compose(
+    _ => compose.client(Object.assign({}, options, {
       method: 'POST',
       url: 'https://chrome.google.com/webstore/ajax/item',
       qs: {
@@ -28,19 +28,19 @@ module.exports = {
         token: offset ? `${offset}@${offset}` : undefined,
         pv: version || VERSION,
       },
-    }),
+    })),
     ({body}) => JSON.parse(body.slice(5))[1][1].map(format.item),
   )(),
 
-  detail: ({id, related, more, version}) => compose(
-    _ => compose.client({
+  detail: ({id, related, more, version, ...options}) => compose(
+    _ => compose.client(Object.assign({}, options, {
       method: 'POST',
       url: 'https://chrome.google.com/webstore/ajax/detail',
       qs: {
         id,
         pv: version || VERSION,
       },
-    }),
+    })),
     ({body}) => ((json = JSON.parse(body.slice(5))) => Object.assign(
       format.detail(json[1][1]),
       related && {related: json[1][2].map(format.item)},
@@ -48,8 +48,8 @@ module.exports = {
     ))(),
   )(),
 
-  reviews: ({id, count, offset, locale, sort, version}) => compose(
-    _ => compose.client({
+  reviews: ({id, count, offset, locale, sort, version, ...options}) => compose(
+    _ => compose.client(Object.assign({}, options, {
       method: 'POST',
       url: 'https://chrome.google.com/webstore/reviews/get',
       qs: {
@@ -62,12 +62,12 @@ module.exports = {
         ]),
         pv: version || VERSION,
       }
-    }),
+    })),
     ({body}) => JSON.parse(body.slice(5))[1][4].map(format.review),
   )(),
 
-  issues: ({id, type, count, page, version}) => compose(
-    _ => compose.client({
+  issues: ({id, type, count, page, version, ...options}) => compose(
+    _ => compose.client(Object.assign({}, options, {
       method: 'POST',
       url: 'https://chrome.google.com/webstore/issues/get',
       qs: {
@@ -83,7 +83,7 @@ module.exports = {
         ]),
         pv: version || VERSION,
       }
-    }),
+    })),
     ({body}) => JSON.parse(body.slice(5))[1][1].map(format.issue),
   )(),
 
