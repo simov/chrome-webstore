@@ -25,4 +25,14 @@ var webstore = require('../')
     console.log(issues)
   },
 
+  // set request-compose options
+  3: async () => {
+    var issues = await webstore.issues({
+      id: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk',
+      headers: {'user-agent': 'chrome-webstore'},
+      timeout: 10000,
+    })
+    console.log(issues)
+  },
+
 }[key]()))(process.argv[2])

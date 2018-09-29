@@ -47,4 +47,14 @@ var webstore = require('../')
     console.log(meta)
   },
 
+  // set request-compose options
+  7: async () => {
+    var meta = await webstore.detail({
+      id: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk',
+      headers: {'user-agent': 'chrome-webstore'},
+      timeout: 10000,
+    })
+    console.log(meta)
+  },
+
 }[key]()))(process.argv[2])

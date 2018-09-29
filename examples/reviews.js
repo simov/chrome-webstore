@@ -33,4 +33,14 @@ var webstore = require('../')
     console.log(reviews)
   },
 
+  // set request-compose options
+  4: async () => {
+    var reviews = await webstore.reviews({
+      id: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk',
+      headers: {'user-agent': 'chrome-webstore'},
+      timeout: 10000,
+    })
+    console.log(reviews)
+  },
+
 }[key]()))(process.argv[2])
