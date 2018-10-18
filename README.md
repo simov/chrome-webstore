@@ -10,16 +10,17 @@
 - **[API](#api)**
 - **[Arguments](#arguments)**
   - [detail](#detail) / [items](#items) / [reviews](#reviews) / [issues](#issues)
+- **[Chrome Web Store API Version](#chrome-web-store-api-version)**
 - **[Examples](#examples)**
 
 # API
 
 Name    | Arguments | Returns    | Description
 ---     | ---       | ---        | ---
-detail  | `{id, related, more, ...options}`  | `{Object}` | Full details about a Web Store item
-items   | `{search, category, rating, features, count, offset, ...options}` | `[Array]` | List Web Store items (subset of the detail data)
-reviews | `{id, count, offset, locale, sort, ...options}` | `[Array]` | List reviews for an item
-issues  | `{id, type, count, page, ...options}` | `[Array]` | List issues for an item
+detail  | `{id, related, more, version, ...options}`  | `{Object}` | Full details about a Web Store item
+items   | `{search, category, rating, features, count, offset, version, ...options}` | `[Array]` | List Web Store items (subset of the detail data)
+reviews | `{id, count, offset, locale, sort, version, ...options}` | `[Array]` | List reviews for an item
+issues  | `{id, type, count, page, version, ...options}` | `[Array]` | List issues for an item
 
 ```js
 var webstore = require('chrome-webstore')
@@ -179,6 +180,7 @@ Parameter  | Example   | Description
 id         | `'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'` | Item ID
 related    | `true`    | Additionally return a list of related extensions
 more       | `true`    | Additionally return more items from the same developer
+version    | `20181009`| [API version](#chrome-web-store-api-version)
 ...options | `agent, timeout` | any [request-compose][compose-client-options] option
 
 ---
@@ -193,6 +195,7 @@ rating     | `5` / `4` / `3` / `2` | Filter items by number of stars
 features   | `['free', 'gdrive']` | Filter items by feature set
 count      | `15`             | Number of items to return (defaults to 5)
 offset     | `15`             | Start returning items from `offset` (**requires** `category`)
+version    | `20181009`       | [API version](#chrome-web-store-api-version)
 ...options | `agent, timeout` | any [request-compose][compose-client-options] option
 
 ### category
@@ -230,6 +233,7 @@ count      | `10`     | Number of reviews to return (defaults to 5)
 offset     | `10`     | Start returning items from offset
 locale     | `'en'`   | Return reviews only in locale (defaults to all locales)
 sort       | `'helpful'` / `'recent'` | Sort order (defaults to helpful)
+version    | `20181009`| [API version](#chrome-web-store-api-version)
 ...options | `agent, timeout` | any [request-compose][compose-client-options] option
 
 ---
@@ -242,7 +246,20 @@ id         | `'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'` | Item ID
 type       | `'problem'` / `'question'` / `'suggestion'` | Filter by issue type (defaults to all)
 count      | `10`    | Number of issues to return (defaults to 5)
 page       | `2`     | Start returning issues from page (page * count)
+version    | `20181009`| [API version](#chrome-web-store-api-version)
 ...options | `agent, timeout` | any [request-compose][compose-client-options] option
+
+# Chrome Web Store API Version
+
+The Chrome Web Store REST API have a version string that needs to be passed with each request. For convenience the last known version of the REST API is hardcoded inside the module and used by default.
+
+In case you are getting `400 Bad Request` errors you might need to pass the correct REST API version explicitly, using the optional `version` argument.
+
+The correct REST API `version` can be obtained as follows:
+
+- Open `DevTools`, click on the `Network` tab and filter by `XHR` requests only
+- Click on one of the requests and take a look at the `Request URL`
+- Find the `pv` parameter in the `Request URL`, its value is the `version` that you need to pass
 
 # Examples
 
