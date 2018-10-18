@@ -8,7 +8,7 @@ var format = {
   issue: require('./format/issue'),
 }
 
-var VERSION = '20180301'
+var VERSION = '20181009'
 
 
 module.exports = {
