@@ -1,7 +1,7 @@
 
 var webstore = require('../')
 
-;((key) => ({
+;({
 
   // get the last 5 reviews for all languages sorted by helpful flag
   0: async () => {
@@ -43,4 +43,4 @@ var webstore = require('../')
     console.log(reviews)
   },
 
-}[key]()))(process.argv[2])
+})[process.argv[2]]()

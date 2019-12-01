@@ -1,7 +1,7 @@
 
 var webstore = require('../')
 
-;((key) => ({
+;({
 
   // markdown-viewer
   0: async () => {
@@ -57,4 +57,4 @@ var webstore = require('../')
     console.log(meta)
   },
 
-}[key]()))(process.argv[2])
+})[process.argv[2]]()

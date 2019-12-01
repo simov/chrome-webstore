@@ -1,7 +1,7 @@
 
 var webstore = require('../')
 
-;((key) => ({
+;({
 
   // get the last 5 issues
   0: async () => {
@@ -35,4 +35,4 @@ var webstore = require('../')
     console.log(issues)
   },
 
-}[key]()))(process.argv[2])
+})[process.argv[2]]()

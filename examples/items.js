@@ -1,7 +1,7 @@
 
 var webstore = require('../')
 
-;((key) => ({
+;({
 
   // search by markdown string
   0: async () => {
@@ -106,4 +106,4 @@ var webstore = require('../')
     agent.destroy()
   },
 
-}[key]()))(process.argv[2])
+})[process.argv[2]]()
