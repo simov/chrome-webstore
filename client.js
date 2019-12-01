@@ -53,14 +53,16 @@ module.exports = {
       method: 'POST',
       url: 'https://chrome.google.com/webstore/reviews/get',
       qs: {
-        searchRequest: JSON.stringify([
+        pv: version || VERSION,
+      },
+      form: {
+        'f.req': JSON.stringify([
           `http://chrome.google.com/extensions/permalink?id=${id}`,
           locale || '',
           [count || 5, offset || 0],
           {helpful: 1, recent: 2}[sort] || 1,
           []
         ]),
-        pv: version || VERSION,
       }
     })),
     ({body}) => JSON.parse(body.slice(5))[1][4].map(format.review),
@@ -71,7 +73,10 @@ module.exports = {
       method: 'POST',
       url: 'https://chrome.google.com/webstore/issues/get',
       qs: {
-        searchOption: JSON.stringify([
+        pv: version || VERSION,
+      },
+      form: {
+        'f.req': JSON.stringify([
           `http://chrome.google.com/extensions/permalink?id=${id}`,
           null,
           type === 'problem' ? 0 :
@@ -81,7 +86,6 @@ module.exports = {
           page || 1,
           count || 5,
         ]),
-        pv: version || VERSION,
       }
     })),
     ({body}) => JSON.parse(body.slice(5))[1][1].map(format.issue),
