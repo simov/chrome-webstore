@@ -47,8 +47,16 @@ var webstore = require('../')
     console.log(meta)
   },
 
-  // set request-compose options
+  // set locale
   7: async () => {
+    var meta = await webstore.detail({
+      id: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk', locale: 'bg'
+    })
+    console.log(meta)
+  },
+
+  // set request-compose options
+  8: async () => {
     var meta = await webstore.detail({
       id: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk',
       headers: {'user-agent': 'chrome-webstore'},

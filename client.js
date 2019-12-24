@@ -13,7 +13,7 @@ var VERSION = '20181009'
 
 module.exports = {
 
-  items: ({search, category, rating, features, count, offset, version, ...options}) => compose(
+  items: ({search, category, rating, features, count, offset, locale, version, ...options}) => compose(
     _ => compose.client(Object.assign({}, options, {
       method: 'POST',
       url: 'https://chrome.google.com/webstore/ajax/item',
@@ -26,18 +26,20 @@ module.exports = {
           .filter((i) => typeof i === 'number'),
         count: count || 5,
         token: offset ? `${offset}@${offset}` : undefined,
+        hl: locale || 'en',
         pv: version || VERSION,
       },
     })),
     ({body}) => JSON.parse(body.slice(5))[1][1].map(format.item),
   )(),
 
-  detail: ({id, related, more, version, ...options}) => compose(
+  detail: ({id, related, more, locale, version, ...options}) => compose(
     _ => compose.client(Object.assign({}, options, {
       method: 'POST',
       url: 'https://chrome.google.com/webstore/ajax/detail',
       qs: {
         id,
+        hl: locale || 'en',
         pv: version || VERSION,
       },
     })),

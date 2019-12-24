@@ -59,8 +59,16 @@ var webstore = require('../')
     console.log(meta)
   },
 
-  // get all extensions in a collection - using recursion
+  // set locale
   8: async () => {
+    var meta = await webstore.items({
+      search: 'markdown', locale: 'bg'
+    })
+    console.log(meta)
+  },
+
+  // get all extensions in a collection - using recursion
+  9: async () => {
     // use 3 persistent sockets
     var https = require('https')
     var agent = new https.Agent({keepAlive: true, maxSockets: 3})
@@ -85,7 +93,7 @@ var webstore = require('../')
   },
 
   // get all extensions in a collection - using while
-  9: async () => {
+  10: async () => {
     // use 3 persistent sockets
     var https = require('https')
     var agent = new https.Agent({keepAlive: true, maxSockets: 3})
