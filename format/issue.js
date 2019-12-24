@@ -13,4 +13,9 @@ module.exports = (issue) => ({
   browser: issue[9],
   version: issue[10],
   date: issue[12],
+  author: {
+    id: issue[16][0],
+    name: issue[16][1],
+    avatar: issue[16][2] ? `https:${issue[16][2]}` : null,
+  },
 })

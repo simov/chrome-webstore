@@ -151,20 +151,28 @@ var webstore = require('chrome-webstore')
 
 ```js
 [
-  { type: 'suggestion',
-    status: 'open',
-    title: 'Is it possible to support previewing sequence diagrams?',
-    description: 'Is it possible to support previewing sequence diagrams? Such as\n\n````sequence\nAlice->Bob: Hello Bob, how are you?\nNote right of Bob: Bob thinks\nBob-->Alice: I am good thanks!\n````\n',
-    browser: '5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
-    version: '3.6',
-    date: 1536911367008 },
   { type: 'problem',
     status: 'open',
-    title: 'Unicode characters not displaying correctly',
-    description: 'works perfect is the  best of i find, butt... \nUnicode characters not displaying correctly',
-    browser: '5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36',
+    title: 'MD viewer issue',
+    description: 'I am loading local file URLs to the browser and MD viewer is not markingdown the file anymore, I have allowed all sites and remote/local files so am struggling to understand why it\'s not working anymore',
+    browser: '5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36',
     version: '3.6',
-    date: 1536360343936 }
+    date: 1552132412409,
+    author:
+     { id: '000000db916e36f5',
+       name: 'jermaine ijieh',
+       avatar: 'https://lh3.googleusercontent.com/a-/AAuE7mBx6Mib80sZHY7D2eznEIYCjj_hlYn3iKGhxfLtDg=s40-c-k' } },
+  { type: 'suggestion',
+    status: 'closed',
+    title: 'Blacklisting',
+    description: 'Instead of whitelisting I would prefer to blacklist sites:\n\nI would like to have md-display support on all sites but I would disable it on website which already have it embedded, e.g. github.com.',
+    browser: '5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36',
+    version: '3.6',
+    date: 1540380998369,
+    author:
+     { id: '00000050ec61452a',
+       name: 'Earl Marshal',
+       avatar: 'https://lh3.googleusercontent.com/a-/AAuE7mAqC0HHGKzwA7P1YArM1y-EvYIH4c7CMFO0le-_Iw=s40-c-k' } }
 ]
 ```
 
