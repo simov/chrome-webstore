@@ -130,8 +130,7 @@ var webstore = require('chrome-webstore')
     author:
      { id: '0000009cb63b6d30',
        name: 'Quan Lao',
-       avatar: null,
-       url: 'https://plus.google.com/112697168067713123105' } },
+       avatar: null } },
   { rating: 3,
     message: 'Useful and effective.\nGood to have a provision to easily include additional codeblock languages as an extension function.',
     created: 1531466745894,
@@ -139,8 +138,7 @@ var webstore = require('chrome-webstore')
     author:
      { id: '000000ed243a38c0',
        name: 'Girisan Ramankutty',
-       avatar: 'https://lh3.googleusercontent.com/-yXupPr2Oyig/AAAAAAAAAAI/AAAAAAAAAFg/_9tTLqzivCA/s40-c-k/photo.jpg',
-       url: 'https://plus.google.com/113509128358323131688' } }
+       avatar: 'https://lh3.googleusercontent.com/-yXupPr2Oyig/AAAAAAAAAAI/AAAAAAAAAFg/_9tTLqzivCA/s40-c-k/photo.jpg' } }
 ]
 ```
 
