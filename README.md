@@ -187,7 +187,7 @@ id         | `'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'` | Item ID
 related    | `true`    | Additionally return a list of related extensions
 more       | `true`    | Additionally return more items from the same developer
 locale     | `'bg'`    | Set locale for the response data (defaults to 'en')
-version    | `20181009`| [API version](#chrome-web-store-api-version)
+version    | `20200316`| [API version](#chrome-web-store-api-version)
 ...options | `agent, timeout` | any [request-compose][compose-client-options] option
 
 ---
@@ -203,7 +203,7 @@ features   | `['free', 'gdrive']` | Filter items by feature set
 count      | `15`             | Number of items to return (defaults to 5)
 offset     | `15`             | Start returning items from `offset` (**requires** `category`)
 locale     | `'bg'`           | Set locale for the response data (defaults to 'en')
-version    | `20181009`       | [API version](#chrome-web-store-api-version)
+version    | `20200316`       | [API version](#chrome-web-store-api-version)
 ...options | `agent, timeout` | any [request-compose][compose-client-options] option
 
 ### category
@@ -241,7 +241,7 @@ count      | `10`     | Number of reviews to return (defaults to 5)
 offset     | `10`     | Start returning items from offset
 locale     | `'en'`   | Return reviews only in locale (defaults to all locales)
 sort       | `'helpful'` / `'recent'` | Sort order (defaults to helpful)
-version    | `20181009`| [API version](#chrome-web-store-api-version)
+version    | `20200316`| [API version](#chrome-web-store-api-version)
 ...options | `agent, timeout` | any [request-compose][compose-client-options] option
 
 ---
@@ -254,14 +254,14 @@ id         | `'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'` | Item ID
 type       | `'problem'` / `'question'` / `'suggestion'` | Filter by issue type (defaults to all)
 count      | `10`    | Number of issues to return (defaults to 5)
 page       | `2`     | Start returning issues from page (page * count)
-version    | `20181009`| [API version](#chrome-web-store-api-version)
+version    | `20200316`| [API version](#chrome-web-store-api-version)
 ...options | `agent, timeout` | any [request-compose][compose-client-options] option
 
 # Chrome Web Store API Version
 
-The Chrome Web Store REST API have a version string that needs to be passed with each request. For convenience the last known version of the REST API is hardcoded inside the module and set by default.
+The Chrome Web Store REST API have a version string that needs to be sent with each request. For convenience the last known version of the REST API is hardcoded inside the module and set by default.
 
-In case of `400 Bad Request` errors you might have to pass the correct REST API version explicitly, using the optional `version` argument.
+In case of `400 Bad Request` errors you might have to set the correct REST API version explicitly, using the optional `version` argument.
 
 The correct REST API `version` can be obtained as follows:
 
@@ -269,7 +269,7 @@ The correct REST API `version` can be obtained as follows:
 - Open `DevTools`, and click on the `Network` tab, then filter by `XHR` requests only
 - Reload the page
 - Click on one of the requests and take a look at the `Request URL`
-- Find the `pv` parameter in the `Request URL`, that's the `version` that you need to pass
+- Find the `pv` parameter in the `Request URL`, that's the `version` that you need to set
 
 # Examples
 
