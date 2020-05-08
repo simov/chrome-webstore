@@ -93,4 +93,12 @@ module.exports = {
     ({body}) => JSON.parse(body.slice(5))[1][1].map(format.issue),
   )(),
 
+  pv: options => compose(
+    _ => compose.client(Object.assign({}, options, {
+      method: 'GET',
+      url: 'https://chrome.google.com/webstore/category/extensions',
+    })),
+    ({body}) => JSON.parse(/<script type="application\/json" id="cws-session-data"[^>]*>([\s\S]+?)<\/script>/.exec(body)[1])[20],
+  )(),
+
 }
