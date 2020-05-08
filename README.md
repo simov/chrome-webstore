@@ -21,7 +21,7 @@ detail  | `{id, related, more, locale, version, ...options}`  | `{Object}` | Ful
 items   | `{search, category, rating, features, count, offset, locale, version, ...options}` | `[Array]` | List Web Store items (subset of the detail data)
 reviews | `{id, count, offset, locale, sort, version, ...options}` | `[Array]` | List reviews for an item
 issues  | `{id, type, count, page, version, ...options}` | `[Array]` | List issues for an item
-pv      | `options` | `string` | Chrome Web Store [API version](#chrome-web-store-api-version)
+version | `{...options}` | `string` | Chrome Web Store [API version](#chrome-web-store-api-version)
 
 ```js
 var webstore = require('chrome-webstore')
@@ -31,7 +31,7 @@ var webstore = require('chrome-webstore')
   var details = await webstore.detail({id: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'})
   var reviews = await webstore.reviews({id: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'})
   var issues = await webstore.issues({id: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'})
-  var version = await webstore.pv()
+  var version = await webstore.version()
 })()
 ```
 
@@ -259,11 +259,13 @@ page       | `2`     | Start returning issues from page (page * count)
 version    | `20200316`| [API version](#chrome-web-store-api-version)
 ...options | `agent, timeout` | any [request-compose][compose-client-options] option
 
-## pv
+---
+
+## version
 
 Parameter  | Example | Description
 ---        | :---:   | ---
-options    | `agent, timeout` | any [request-compose][compose-client-options] option
+...options | `agent, timeout` | any [request-compose][compose-client-options] option
 
 # Chrome Web Store API Version
 
@@ -271,7 +273,7 @@ The Chrome Web Store REST API have a version string that needs to be sent with e
 
 In case of `400 Bad Request` errors you might have to set the correct REST API version explicitly, using the optional `version` argument.
 
-The correct REST API `version` can be obtained via [`pv`](#pv) or manually as follows:
+The correct REST API `version` can be obtained using the [`version`](#version) method or manually as follows:
 
 - Open an extension page on [chrome.google.com]
 - Open `DevTools`, and click on the `Network` tab, then filter by `XHR` requests only
@@ -281,13 +283,14 @@ The correct REST API `version` can be obtained via [`pv`](#pv) or manually as fo
 
 # Examples
 
-> [detail][example-detail] / [items][example-items] / [reviews][example-reviews] / [issues][example-issues]
+> [detail][example-detail] / [items][example-items] / [reviews][example-reviews] / [issues][example-issues] / [version][example-version]
 
 ```bash
 node examples/detail.js [example index]
 node examples/items.js [example index]
 node examples/reviews.js [example index]
 node examples/issues.js [example index]
+node examples/version.js [example index]
 ```
 
 
@@ -309,3 +312,4 @@ node examples/issues.js [example index]
   [example-items]: https://github.com/simov/chrome-webstore/blob/master/examples/items.js
   [example-reviews]: https://github.com/simov/chrome-webstore/blob/master/examples/reviews.js
   [example-issues]: https://github.com/simov/chrome-webstore/blob/master/examples/issues.js
+  [example-version]: https://github.com/simov/chrome-webstore/blob/master/examples/version.js
