@@ -21,7 +21,7 @@ detail  | `{id, related, more, locale, version, ...options}`  | `{Object}` | Ful
 items   | `{search, category, rating, features, count, offset, locale, version, ...options}` | `[Array]` | List Web Store items (subset of the detail data)
 reviews | `{id, count, offset, locale, sort, version, ...options}` | `[Array]` | List reviews for an item
 issues  | `{id, type, count, page, version, ...options}` | `[Array]` | List issues for an item
-pv      | `options` | `string` | Chrome Web Store [API version](https://github.com/simov/chrome-webstore#chrome-web-store-api-version)
+pv      | `options` | `string` | Chrome Web Store [API version](#chrome-web-store-api-version)
 
 ```js
 var webstore = require('chrome-webstore')
@@ -271,7 +271,7 @@ The Chrome Web Store REST API have a version string that needs to be sent with e
 
 In case of `400 Bad Request` errors you might have to set the correct REST API version explicitly, using the optional `version` argument.
 
-The correct REST API `version` can be obtained via [`pv`][#pv] or manually as follows:
+The correct REST API `version` can be obtained via [`pv`](#pv) or manually as follows:
 
 - Open an extension page on [chrome.google.com]
 - Open `DevTools`, and click on the `Network` tab, then filter by `XHR` requests only
