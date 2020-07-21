@@ -1,12 +1,10 @@
 
 var compose = require('request-compose')
 
-var format = {
-  detail: require('./format/detail'),
-  item: require('./format/item'),
-  review: require('./format/review'),
-  issue: require('./format/issue'),
-}
+var detail = require('./map/detail')
+var item = require('./map/item')
+var review = require('./map/review')
+var issue = require('./map/issue')
 
 var VERSION = '20200420'
 
@@ -14,7 +12,7 @@ var VERSION = '20200420'
 module.exports = {
 
   items: ({search, category, rating, features, count, offset, locale, version, ...options}) => compose(
-    _ => compose.client(Object.assign({}, options, {
+    _ => compose.client({...options,
       method: 'POST',
       url: 'https://chrome.google.com/webstore/ajax/item',
       qs: {
@@ -29,12 +27,12 @@ module.exports = {
         hl: locale || 'en',
         pv: version || VERSION,
       },
-    })),
-    ({body}) => JSON.parse(body.slice(5))[1][1].map(format.item),
+    }),
+    ({body}) => JSON.parse(body.slice(5))[1][1].map(item),
   )(),
 
   detail: ({id, related, more, locale, version, ...options}) => compose(
-    _ => compose.client(Object.assign({}, options, {
+    _ => compose.client({...options,
       method: 'POST',
       url: 'https://chrome.google.com/webstore/ajax/detail',
       qs: {
@@ -42,16 +40,16 @@ module.exports = {
         hl: locale || 'en',
         pv: version || VERSION,
       },
-    })),
+    }),
     ({body}) => ((json = JSON.parse(body.slice(5))) => Object.assign(
-      format.detail(json[1][1]),
-      related && {related: json[1][2].map(format.item)},
-      more && {more: json[1][3].map(format.item)},
+      detail(json[1][1]),
+      related && {related: json[1][2].map(item)},
+      more && {more: json[1][3].map(item)},
     ))(),
   )(),
 
   reviews: ({id, count, offset, locale, sort, version, ...options}) => compose(
-    _ => compose.client(Object.assign({}, options, {
+    _ => compose.client({...options,
       method: 'POST',
       url: 'https://chrome.google.com/webstore/reviews/get',
       qs: {
@@ -66,12 +64,12 @@ module.exports = {
           []
         ]),
       }
-    })),
-    ({body}) => JSON.parse(body.slice(5))[1][4].map(format.review),
+    }),
+    ({body}) => JSON.parse(body.slice(5))[1][4].map(review),
   )(),
 
   issues: ({id, type, count, page, version, ...options}) => compose(
-    _ => compose.client(Object.assign({}, options, {
+    _ => compose.client({...options,
       method: 'POST',
       url: 'https://chrome.google.com/webstore/issues/get',
       qs: {
@@ -89,15 +87,15 @@ module.exports = {
           count || 5,
         ]),
       }
-    })),
-    ({body}) => JSON.parse(body.slice(5))[1][1].map(format.issue),
+    }),
+    ({body}) => JSON.parse(body.slice(5))[1][1].map(issue),
   )(),
 
   version: (options) => compose(
-    _ => compose.client(Object.assign({}, options, {
+    _ => compose.client({...options,
       method: 'GET',
       url: 'https://chrome.google.com/webstore/category/extensions',
-    })),
+    }),
     ({body}) => JSON.parse(
       /<script type="application\/json" id="cws-session-data"[^>]*>([\s\S]+?)<\/script>/
         .exec(body)[1])[20],
