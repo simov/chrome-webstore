@@ -15,16 +15,16 @@
     "url": "https://github.com/simov/chrome-webstore.git"
   },
   "dependencies": {
-    "request-compose": "^2.0.0"
+    "request-compose": "^2.1.0"
   },
   "devDependencies": {
-    "request-logs": "^2.0.0"
+    "request-logs": "^2.1.1"
   },
   "bin": {},
   "main": "./client.js",
   "type": "commonjs",
   "files": [
-    "format/",
+    "map/",
     "client.js",
     "LICENSE",
     "README.md",
