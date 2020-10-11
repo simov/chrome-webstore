@@ -18,7 +18,7 @@
     "request-compose": "^2.1.0"
   },
   "devDependencies": {
-    "request-logs": "^2.1.1"
+    "request-logs": "^2.1.2"
   },
   "bin": {},
   "main": "./client.js",
