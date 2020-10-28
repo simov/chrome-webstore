@@ -189,7 +189,7 @@ id         | `'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'` | Item ID
 related    | `true`    | Additionally return a list of related extensions
 more       | `true`    | Additionally return more items from the same developer
 locale     | `'bg'`    | Set locale for the response data (defaults to 'en')
-version    | `20200924`| [API version](#chrome-web-store-api-version)
+version    | `20201002`| [API version](#chrome-web-store-api-version)
 ...options | `agent, timeout` | any [request-compose][compose-client-options] option
 
 ---
@@ -205,7 +205,7 @@ features   | `['free', 'gdrive']` | Filter items by feature set
 count      | `15`             | Number of items to return (defaults to 5)
 offset     | `15`             | Start returning items from `offset` (**requires** `category`)
 locale     | `'bg'`           | Set locale for the response data (defaults to 'en')
-version    | `20200924`       | [API version](#chrome-web-store-api-version)
+version    | `20201002`       | [API version](#chrome-web-store-api-version)
 ...options | `agent, timeout` | any [request-compose][compose-client-options] option
 
 ### category
@@ -243,7 +243,7 @@ count      | `10`     | Number of reviews to return (defaults to 5)
 offset     | `10`     | Start returning items from offset
 locale     | `'en'`   | Return reviews only in locale (defaults to all locales)
 sort       | `'helpful'` / `'recent'` | Sort order (defaults to helpful)
-version    | `20200924`| [API version](#chrome-web-store-api-version)
+version    | `20201002`| [API version](#chrome-web-store-api-version)
 ...options | `agent, timeout` | any [request-compose][compose-client-options] option
 
 ---
@@ -256,7 +256,7 @@ id         | `'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'` | Item ID
 type       | `'problem'` / `'question'` / `'suggestion'` | Filter by issue type (defaults to all)
 count      | `10`    | Number of issues to return (defaults to 5)
 page       | `2`     | Start returning issues from page (page * count)
-version    | `20200924`| [API version](#chrome-web-store-api-version)
+version    | `20201002`| [API version](#chrome-web-store-api-version)
 ...options | `agent, timeout` | any [request-compose][compose-client-options] option
 
 ---
