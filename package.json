@@ -22,10 +22,12 @@
   },
   "bin": {},
   "main": "./client.js",
+  "types": "./client.d.ts",
   "type": "commonjs",
   "files": [
     "map/",
     "client.js",
+    "client.d.ts",
     "LICENSE",
     "README.md",
     "package.json"
