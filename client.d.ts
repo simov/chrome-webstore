@@ -254,5 +254,3 @@ declare module 'chrome-webstore' {
    */
   export function version(options?: VersionOptions): Promise<string>
 }
-
-export default 'chrome-webstore'
