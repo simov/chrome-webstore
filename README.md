@@ -186,8 +186,8 @@ var webstore = require('chrome-webstore')
 Parameter  | Example   | Description
 ---        | :---:     | ---
 id         | `'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'` | Item ID
-related    | `true`    | Additionally return a list of related extensions
-more       | `true`    | Additionally return more items from the same developer
+related    | `true`    | Include a list of related extensions
+more       | `true`    | Include a list with more items from the same developer
 locale     | `'bg'`    | Set locale for the response data (defaults to 'en')
 version    | `20201016`| [API version](#chrome-web-store-api-version)
 ...options | `agent, timeout` | any [request-compose][compose-client-options] option
