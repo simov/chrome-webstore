@@ -1,6 +1,6 @@
 {
   "name": "chrome-webstore",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "Google Chrome Web Store HTTP Client",
   "keywords": [
     "chrome",
