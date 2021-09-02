@@ -6,7 +6,7 @@ var item = require('./map/item')
 var review = require('./map/review')
 var issue = require('./map/issue')
 
-var VERSION = '20201016'
+var VERSION = '20210820'
 
 
 module.exports = {
