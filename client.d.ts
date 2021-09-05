@@ -16,22 +16,15 @@ export interface Item {
   url: string
   author: {
     name: string
-    domain: string
-    url: string
+    domain: string | null
+    url: string | null
   }
-  description: string
-  website: string
-  support: string
-  version: string
-  size: string
-  published: string
   users: string
   rating: {
     average: number
     count: number
   }
-  price: string
-  purchases: null
+  price: string | null
   category: {
     name: string
     slug: string
@@ -44,6 +37,20 @@ export interface Item {
     '440x280': string | null
     '460x340': string | null
   }
+  status: string | null
+}
+
+/**
+ * Chrome Web Store Detail
+ */
+export interface Detail extends Item {
+  description: string
+  website: string
+  support: string
+  version: string
+  size: string
+  published: string
+  purchases: null
   languages: string[]
   developer: {
     email: string | null
@@ -51,8 +58,9 @@ export interface Item {
     policy: string | null
   }
   type: string
-  status: string
   manifest: string
+  related: Item[] | undefined
+  more: Item[] | undefined
 }
 
 /**
@@ -74,7 +82,7 @@ export interface Review {
  * Chrome Web Store Issue
  */
 export interface Issue {
-  type: 'problem' | 'question' | 'suggestion'
+  type: string
   status: string
   title: string
   description: string
@@ -233,7 +241,7 @@ declare module 'chrome-webstore' {
    * Get full details about a Web Store item
    * @param options __`id`__ | `related` | `more` | `locale` | `version`
    */
-  export function detail(options: DetailOptions): Promise<Item>
+  export function detail(options: DetailOptions): Promise<Detail>
   /**
    * List Web Store items (subset of the detail data)
    * @param options `search` | `category` | `rating` | `features` | `count` | `offset` | `locale` | `version`
