@@ -1,4 +1,3 @@
-
 import {
   RequestOptions as RequestComposeOptions,
 } from 'request-compose'
@@ -126,6 +125,11 @@ export interface DetailOptions extends RequestComposeOptions {
 }
 
 /**
+ * Item feature set
+ */
+export type Features = 'offline' | 'google' | 'free' | 'android' | 'gdrive'
+
+/**
  * Items options
  */
 export interface ItemsOptions extends RequestComposeOptions {
@@ -144,7 +148,7 @@ export interface ItemsOptions extends RequestComposeOptions {
   /**
    * Filter items by feature set
    */
-  features?: ('offline' | 'google' | 'free' | 'android' | 'gdrive')[]
+  features?: Features[]
   /**
    * Number of items to return
    * @default 5
@@ -226,11 +230,6 @@ export interface IssuesOptions extends RequestComposeOptions {
   version?: string
 }
 
-/**
- * Version options
- */
-export interface VersionOptions extends RequestComposeOptions {}
-
 // ----------------------------------------------------------------------------
 
 /**
@@ -241,24 +240,24 @@ declare module 'chrome-webstore' {
    * Get full details about a Web Store item
    * @param options __`id`__ | `related` | `more` | `locale` | `version`
    */
-  export function detail(options: DetailOptions): Promise<Detail>
+  function detail(options: DetailOptions): Promise<Detail>
   /**
    * List Web Store items (subset of the detail data)
    * @param options `search` | `category` | `rating` | `features` | `count` | `offset` | `locale` | `version`
    */
-  export function items(options: ItemsOptions): Promise<Item[]>
+  function items(options: ItemsOptions): Promise<Item[]>
   /**
    * List reviews for an item
    * @param options __`id`__ | `count` | `offset` | `locale` | `sort` | `version`
    */
-  export function reviews(options: ReviewsOptions): Promise<Review[]>
+  function reviews(options: ReviewsOptions): Promise<Review[]>
   /**
    * List issues for an item
    * @params __`id`__ | `type` | `count` | `page` | `version`
    */
-  export function issues(options: IssuesOptions): Promise<Issue[]>
+  function issues(options: IssuesOptions): Promise<Issue[]>
   /**
    * Get Chrome Web Store API version
    */
-  export function version(options?: VersionOptions): Promise<string>
+  function version(options?: RequestComposeOptions): Promise<string>
 }
