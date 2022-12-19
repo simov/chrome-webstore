@@ -13,21 +13,24 @@ export interface Item {
   title: string
   slug: string
   url: string
+  category: {
+    name: string
+    slug: string
+  }
   author: {
     name: string
     domain: string | null
     url: string | null
+  }
+  developer: {
+    verified: boolean | null
   }
   users: string
   rating: {
     average: number
     count: number
   }
-  price: string | null
-  category: {
-    name: string
-    slug: string
-  }
+  featured: boolean | null
   images: {
     '26x26': string | null
     '128x128': string | null
@@ -35,28 +38,35 @@ export interface Item {
     '220x140': string | null
     '440x280': string | null
     '460x340': string | null
+    '700x280': string | null
   }
-  status: string | null
+  features: string[]
+  android: string | null
 }
 
 /**
  * Chrome Web Store Detail
  */
 export interface Detail extends Item {
-  description: string
-  website: string
-  support: string
   version: string
   size: string
-  published: string
   purchases: null
-  languages: string[]
+  description: string
+  type: string
   developer: {
     email: string | null
     address: string | null
     policy: string | null
+    verified: boolean | null
+    trader: boolean | null
   }
-  type: string
+  website: string | null
+  support: string | null
+  video: string | null
+  screenshots: string[]
+  languages: string[]
+  features: string[]
+  collects: string[]
   manifest: string
   related: Item[] | undefined
   more: Item[] | undefined
@@ -81,8 +91,8 @@ export interface Review {
  * Chrome Web Store Issue
  */
 export interface Issue {
-  type: string
-  status: string
+  type: 'problem' | 'question' | 'suggestion'
+  status: 'open' | 'in progress' | 'closed'
   title: string
   description: string
   browser: string
@@ -125,39 +135,30 @@ export interface DetailOptions extends RequestComposeOptions {
 }
 
 /**
- * Item feature set
- */
-export type Features = 'offline' | 'google' | 'free' | 'android' | 'gdrive'
-
-/**
  * Items options
  */
 export interface ItemsOptions extends RequestComposeOptions {
-  /**
-   * Filter items by search term
-   */
-  search?: string
   /**
    * Filter items by category name
    */
   category?: string
   /**
-   * Filter items by number of stars
+   * Filter items by search term
    */
-  rating?: 5 | 4 | 3 | 2
-  /**
-   * Filter items by feature set
-   */
-  features?: Features[]
+  search?: string
   /**
    * Number of items to return
    * @default 5
    */
   count?: number
   /**
-   * Start returning items from `offset` (**requires** `category`)
+   * Filter items by number of stars
    */
-  offset?: number
+  rating?: 5 | 4 | 3 | 2
+  /**
+   * Iteration token
+   */
+  next?: string
   /**
    * Set locale for the response data
    * @default en
@@ -193,7 +194,7 @@ export interface ReviewsOptions extends RequestComposeOptions {
   locale?: string
   /**
    * Sort order
-   * @default helpful
+   * @default recent
    */
   sort?: 'helpful' | 'recent'
   /**
@@ -243,7 +244,7 @@ declare module 'chrome-webstore' {
   function detail(options: DetailOptions): Promise<Detail>
   /**
    * List Web Store items (subset of the detail data)
-   * @param options `search` | `category` | `rating` | `features` | `count` | `offset` | `locale` | `version`
+   * @param options `category` | `search` | `count` | `rating` | `next` | `locale` | `version`
    */
   function items(options: ItemsOptions): Promise<Item[]>
   /**

@@ -8,15 +8,11 @@
     "12-shopping",
     "13-sports",
     "14-fun",
-    "15-by-google",
     "22-accessibility",
     "28-photos",
     "38-search-tools"
   ],
-  "theme": [
-    "48-by-artists",
-    "15-by-google"
-  ],
+  "theme": [],
   "app": [
     "1-communication",
     "2-entertainment",
