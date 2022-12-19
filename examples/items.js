@@ -103,7 +103,7 @@ var webstore = require('../')
 
   // pull the photos extension category
   11: async () => {
-    var get = (items = [], next, page) =>
+    var get = (items = [], next) =>
       webstore.items({
         category: 'ext/28-photos',
         count: 100,
