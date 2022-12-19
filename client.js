@@ -11,24 +11,27 @@ var VERSION = '20210820'
 
 module.exports = {
 
-  items: ({search, category, rating, features, count, offset, locale, version, ...options}) => compose(
+  items: ({category, search, count, rating, next, locale, version, ...options}) => compose(
     _ => compose.client({...options,
       method: 'POST',
       url: 'https://chrome.google.com/webstore/ajax/item',
       qs: {
-        searchTerm: search,
         category,
-        features: (features || [])
-          .map((i) => ({offline: 4, google: 1, free: 5, android: 0, gdrive: 12}[i]))
-          .concat({5: 9, 4: 8, 3: 7, 2: 6}[rating])
-          .filter((i) => typeof i === 'number'),
+        searchTerm: search,
+        features: {5: 9, 4: 8, 3: 7, 2: 6}[rating],
         count: count || 5,
-        token: offset ? `${offset}@${offset}` : undefined,
+        token: next,
         hl: locale || 'en',
         pv: version || VERSION,
       },
     }),
-    ({body}) => JSON.parse(body.slice(5))[1][1].map(item),
+    ({body}) => ((
+      json = JSON.parse(body.slice(5)),
+      items = json[1][1].map(item),
+      next = json[1][4] && json[1][4] !== '#@' && json[1][4]) => (
+      next ? items.next = next : undefined,
+      items
+    ))()
   )(),
 
   detail: ({id, related, more, locale, version, ...options}) => compose(
@@ -60,7 +63,7 @@ module.exports = {
           `http://chrome.google.com/extensions/permalink?id=${id}`,
           locale || '',
           [count || 5, offset || 0],
-          {helpful: 1, recent: 2}[sort] || 1,
+          {helpful: 1, recent: 2}[sort] || 2,
           []
         ]),
       }

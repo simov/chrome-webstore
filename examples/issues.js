@@ -5,7 +5,9 @@ var webstore = require('../')
 
   // get the last 5 issues
   0: async () => {
-    var issues = await webstore.issues({id: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'})
+    var issues = await webstore.issues({
+      id: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'
+    })
     console.log(issues)
   },
 

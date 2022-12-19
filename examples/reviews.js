@@ -3,16 +3,18 @@ var webstore = require('../')
 
 ;({
 
-  // get the last 5 reviews for all languages sorted by helpful flag
+  // get the last 5 reviews for all languages sorted by recent date
   0: async () => {
-    var reviews = await webstore.reviews({id: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'})
+    var reviews = await webstore.reviews({
+      id: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'
+    })
     console.log(reviews)
   },
 
-  // get the last 5 reviews for all languages sorted by recent date
+  // get the last 5 reviews for all languages sorted by helpful flag
   1: async () => {
     var reviews = await webstore.reviews({
-      id: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk', sort: 'recent'
+      id: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk', sort: 'helpful'
     })
     console.log(reviews)
   },

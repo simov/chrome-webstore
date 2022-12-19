@@ -3,115 +3,116 @@ var webstore = require('../')
 
 ;({
 
-  // search by markdown string
+  // --------------------------------------------------------------------------
+  // main categories
+
+  // extensions
   0: async () => {
-    var meta = await webstore.items({search: 'markdown'})
+    var meta = await webstore.items({category: 'extensions'})
     console.log(meta)
   },
 
-  // search for markdown extensions and get the first 5 results
+  // themes
   1: async () => {
+    var meta = await webstore.items({category: 'themes'})
+    console.log(meta)
+  },
+
+  // apps
+  2: async () => {
+    var meta = await webstore.items({category: 'apps'})
+    console.log(meta)
+  },
+
+  // --------------------------------------------------------------------------
+  // search
+
+  // search for markdown extensions
+  3: async () => {
     var meta = await webstore.items({
-      search: 'markdown', category: 'extensions', count: 5
+      category: 'extensions', search: 'markdown'
+    })
+    console.log(meta)
+  },
+
+  // search for markdown extensions and get the first 10 results
+  4: async () => {
+    var meta = await webstore.items({
+      category: 'extensions', search: 'markdown', count: 10
     })
     console.log(meta)
   },
 
   // search for markdown extensions and get the next 5 results
-  2: async () => {
+  5: async () => {
     var meta = await webstore.items({
-      search: 'markdown', category: 'extensions', count: 5, offset: 5
+      category: 'extensions', search: 'markdown'
+    })
+    console.log(meta)
+    var meta = await webstore.items({
+      category: 'extensions', search: 'markdown', next: meta.next
     })
     console.log(meta)
   },
 
   // search by extension id
-  3: async () => {
+  6: async () => {
     var meta = await webstore.items({
-      search: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk', category: 'extensions', count: 1
+      search: 'ckkdlimhmcjmikdlpkmbgfkaikojcbjk'
     })
     console.log(meta)
   },
 
-  // filter by extension category
-  4: async () => {
+  // --------------------------------------------------------------------------
+  // categories and collections
+
+  // productivity extension category
+  7: async () => {
     var meta = await webstore.items({category: 'ext/7-productivity'})
     console.log(meta)
   },
 
   // filter by collection name
-  5: async () => {
-    var meta = await webstore.items({category: 'collection/new_noteworthy_extensions'})
+  8: async () => {
+    var meta = await webstore.items({
+      category: 'collection/chrome-dev-tools-extensions'
+    })
     console.log(meta)
   },
+
+  // --------------------------------------------------------------------------
+  // rating and locale
 
   // filter by item rating
-  6: async () => {
-    var meta = await webstore.items({search: 'markdown', rating: 4})
-    console.log(meta)
-  },
-
-  // filter by item rating and features
-  7: async () => {
+  9: async () => {
     var meta = await webstore.items({
-      search: 'markdown', rating: 4, features: ['offline', 'gdrive']
+      category: 'extensions', search: 'markdown', rating: 4
     })
     console.log(meta)
   },
 
   // set locale
-  8: async () => {
+  10: async () => {
     var meta = await webstore.items({
-      search: 'markdown', locale: 'bg'
+      category: 'extensions', search: 'markdown', locale: 'bg'
     })
     console.log(meta)
   },
 
-  // get all extensions in a collection - using recursion
-  9: async () => {
-    // use 3 persistent sockets
-    var https = require('https')
-    var agent = new https.Agent({keepAlive: true, maxSockets: 3})
+  // --------------------------------------------------------------------------
 
-    var count = 5, items = []
-
-    var page = async (offset) => {
-      var meta = await webstore.items({
-        category: 'collection/weather_extensions', count, offset, agent,
+  // pull the photos extension category
+  11: async () => {
+    var get = (items = [], next, page) =>
+      webstore.items({
+        category: 'ext/28-photos',
+        count: 100,
+        next
       })
-      items = items.concat(meta)
-      if (meta.length === count) {
-        await page(offset + count)
-      }
-    }
+      .then((page) => page.next ? get(items.concat(page), page.next) : items)
 
-    await page(0)
-    console.log(items)
-
-    // destroy all sockets
-    agent.destroy()
-  },
-
-  // get all extensions in a collection - using while
-  10: async () => {
-    // use 3 persistent sockets
-    var https = require('https')
-    var agent = new https.Agent({keepAlive: true, maxSockets: 3})
-
-    var count = 5, items = [], offset = 0, meta = Array(5)
-
-    while (meta.length === count) {
-      meta = await webstore.items({
-        category: 'collection/weather_extensions', count, offset, agent,
-      })
-      items = items.concat(meta)
-      offset = offset + count
-    }
-
-    console.log(items)
-
-    // destroy all sockets
-    agent.destroy()
+    var meta = await get()
+    console.log(meta)
   },
 
 })[process.argv[2]]()
