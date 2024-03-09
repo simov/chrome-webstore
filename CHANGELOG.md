@@ -1,6 +1,10 @@
 
 # Change Log
 
+## v2.0.1 - 2024-03-09
+- details: fix `collects` when missing
+- remove version method
+
 ## v2.0.0 - 2022-12-19
 - details: remove no longer available `price`, `purchases`, `status`
 - detail: add `developer.verified`, `developer.trader`, `featured`, `video`, `screenshots`, `features`, `android`, `collects`
