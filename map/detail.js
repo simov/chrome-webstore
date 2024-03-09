@@ -56,7 +56,7 @@ module.exports = (detail) => ({
     detail[0][56] && 'By Google',
   ].filter(Boolean),
   android: detail[0][69] || null,
-  collects: detail[39].map((index) => ({
+  collects: (detail[39] || []).map((index) => ({
     1: 'Personally identifiable information',
     2: 'Health information',
     3: 'Financial and payment information',
